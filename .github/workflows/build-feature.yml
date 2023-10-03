@@ -1,0 +1,34 @@
+name: build and test feature branch
+on:
+    push:
+        branches:
+            - feature/*
+jobs:
+    build-feature:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: pull and checkout from git repository
+              run: |
+                    echo "pulling and cheking out from git repository"
+            
+            
+
+# create yaml with setup and enviroment for node 18 over linux and install npm package, latest angular version, run test and build the angular app
+
+            - name: setup node 18
+              uses: action/setup-node@v3
+              with:
+                node-version: '18'  
+            
+            - name: Install npm packages
+              run: npm install
+
+            - name: Install Angular CLI
+              run: npm install -g @angular/cli
+            
+            - name: run test and build Angular app
+              run: |
+                ng test --watch=false
+                ng build --prod
+                echo "run test and build angular app"
