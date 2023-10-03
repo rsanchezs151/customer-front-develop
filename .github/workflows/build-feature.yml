@@ -5,30 +5,25 @@ on:
             - feature/*
 jobs:
     build-feature:
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
         steps:
-            - uses: actions/checkout@v3
-            - name: pull and checkout from git repository
-              run: |
-                    echo "pulling and cheking out from git repository"
-            
-            
-
-# create yaml with setup and enviroment for node 18 over linux and install npm package, latest angular version, run test and build the angular app
-
-            - name: setup node 18
-              uses: action/setup-node@v3
+            - name: Checkout del repositorio
+              uses: actions/checkout@v2
+        
+            - name: Configurar Node.js 18
+              uses: actions/setup-node@v3
               with:
-                node-version: '18'  
-            
-            - name: Install npm packages
+                node-version: '18'
+        
+            - name: Instalar paquetes de Node.js
               run: npm install
-
-            - name: Install Angular CLI
+        
+            - name: Instalar Angular CLI
               run: npm install -g @angular/cli
-            
-            - name: run test and build Angular app
-              run: |
-                ng test --watch=false
-                ng build --prod
+        
+            - name: Ejecutar pruebas
+              run: ng test
+        
+            - name: Compilar aplicación Angular
+              run: ng build
                 echo "run test and build angular app"
